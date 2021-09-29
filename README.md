@@ -26,6 +26,6 @@ cat ~/.ssh/id_ed25519.pub
 add it to the SSH setting on the github website
 
 you should now be able to clone the repo using
-git clone git@github.com:JackPatrickBlaiseBrennan/CS3500.git
+git clone git@github.com:Pat-Tadhg-David-Jack-and-Liam/CS3500.git
 
 

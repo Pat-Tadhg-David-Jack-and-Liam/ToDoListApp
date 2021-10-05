@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
         // Plain Text in xml
         EditText editTxt = findViewById(R.id.edittxt);
         txtHello.setText(editTxt.getText());
-        // stop breaking the repo, Pat
 
+        // stop breaking the repo, Pat
+        //test
     }
 
 }

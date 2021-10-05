@@ -29,4 +29,4 @@ you should now be able to clone the repo using
 git clone git@github.com:Pat-Tadhg-David-Jack-and-Liam/CS3500.git
 
 // David is a good man ;)
-
+// don't touch gradle

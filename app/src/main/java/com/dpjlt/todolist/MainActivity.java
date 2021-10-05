@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBtnClick (View view){
         TextView txtHello = findViewById(R.id.textJack);
         txtHello.setText("Hi Jack");
+        // Testing git pull and push from branch
 
     }
 

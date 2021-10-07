@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         txtHello.setText(editTxt.getText());
 
         // stop breaking the repo, Pat
-        //test
+        // no I don't think I will
+
     }
 
 }
-

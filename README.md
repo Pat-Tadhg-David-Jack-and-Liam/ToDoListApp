@@ -43,3 +43,13 @@ git log -p
 ## Deletes most recent commit
 git reset --soft HEAD~1
 
+# GIT WORKFLOW
+git merge origin/main
+
+Do work
+
+git merge origin/main
+
+git push 
+
+Then go to your branch page on the github website and open a pull request and then merge from that pull request

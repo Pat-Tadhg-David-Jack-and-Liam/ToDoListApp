@@ -28,5 +28,28 @@ add it to the SSH setting on the github website
 you should now be able to clone the repo using
 git clone git@github.com:Pat-Tadhg-David-Jack-and-Liam/CS3500.git
 
-// David is a good man ;)
-// don't touch gradle
+
+# Some handy git commands :)
+
+## See uncommited changes
+git diff
+
+## See commits
+git log
+
+## See your latest commit changes
+git log -p
+
+## Deletes most recent commit
+git reset --soft HEAD~1
+
+# GIT WORKFLOW
+git merge origin/main
+
+Do work
+
+git merge origin/main
+
+git push 
+
+Then go to your branch page on the github website and open a pull request and then merge from that pull request

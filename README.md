@@ -58,17 +58,16 @@ Then go to your branch page on the github website and open a pull request and th
 Note that all commands are untested and written from memory, use them at your own risk and don't take them as gospel.
 
 - First you pull changes, this makes sure that your local is up to date with the origin (both your branch(liam) and main should be up to date)
-`git pull origin main`
-`git pull origin liam`
+    - `git pull origin main`
+    - `git pull origin liam`
 
-- Then you will make changes to your branch (be sure you checked out to your branch before coding) and commit these changes
-`git commit -m "my message"`
-- Once finished you will need to pull from remote again to make sure your up to date
-- You can then safely push to origin/liam
-`git push origin/liam`
-    - Note that if you don't have a branch on the remote called liam (tracking branch) then you will need to create clone
-    `git push origin liam`
-- You can now merge with origin/main
-`git checkout origin/liam`
-`git merge origin/master`
+- Then you will make changes to your branch (be sure you checked out to your branch before coding)
+- Once finished you will need to pull from remote again to make sure you're up to date
+- commit these changes
+    - `git commit -m "my message"`
+
+- You should then merge with local main
+    - `git merge main`
+- You can then safely push to origin/main
+    - `git push origin/main`
 

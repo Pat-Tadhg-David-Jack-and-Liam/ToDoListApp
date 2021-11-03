@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
+    // todo make private and access with getter
     public static ToDoList toDoList = AppLaunch.toDoList;
 
     @Override
@@ -13,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toDoList.addItem("WOW");
+       // RecyclerView rvTodoList = (RecyclerView) findViewById(R.id.)
+        // bind the recyclerview
+
+
     }
     public void onBtnClick (View view){
 //        TextView txtHello = findViewById(R.id.textJack);

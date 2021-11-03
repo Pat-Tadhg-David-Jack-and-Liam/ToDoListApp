@@ -3,32 +3,36 @@ package com.dpjlt.todolist;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListADT {
+public final class ToDoList {
     private class Item {
         private String taskHeading;
 
         private Item(String taskHeading){
             this.taskHeading = taskHeading;
         }
+
+        final public String getTaskHeading() {
+            return taskHeading;
+        }
     }
 
     private List<Item> toDoListTasks;
 
 
-    public ListADT(){
+    public ToDoList(){
         toDoListTasks = new ArrayList<Item>();
     }
 
-    public void addItem(String taskHeading){
+    final public void addItem(String taskHeading){
         Item newItem = new Item(taskHeading);
         toDoListTasks.add(newItem);
     }
 
-    public void removeItem(Item item){
+    final public void removeItem(Item item){
         toDoListTasks.remove(item);
     }
 
-    public int getLength(){
+    final public int getLength(){
         return toDoListTasks.size();
     }
 

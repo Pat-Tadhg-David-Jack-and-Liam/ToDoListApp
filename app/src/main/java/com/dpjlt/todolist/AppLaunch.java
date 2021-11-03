@@ -4,10 +4,10 @@ import android.app.Application;
 import android.util.Log;
 
 public class AppLaunch extends Application {
-    public static ListADT toDoList;
+    public static ToDoList toDoList;
 
     public AppLaunch(){
-        toDoList = new ListADT();
+        toDoList = new ToDoList();
         Log.i("main", "Constructor fired");
     }
 }

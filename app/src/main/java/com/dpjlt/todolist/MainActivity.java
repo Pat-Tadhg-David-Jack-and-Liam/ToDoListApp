@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    public static ListADT toDoList = AppLaunch.toDoList;
+    public static ToDoList toDoList = AppLaunch.toDoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

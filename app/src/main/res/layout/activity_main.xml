@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
+<!--        android:id="@+id/todoList"-->
 <!--        android:layout_width="409dp"-->
 <!--        android:layout_height="662dp"-->
 <!--        tools:layout_editor_absoluteX="1dp"-->

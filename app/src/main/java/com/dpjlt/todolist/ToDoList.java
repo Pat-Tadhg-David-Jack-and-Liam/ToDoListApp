@@ -14,6 +14,9 @@ public final class ToDoList {
         final public String getTaskHeading() {
             return taskHeading;
         }
+        final public void setTaskHeading(String taskHeading) {
+            this.taskHeading = taskHeading;
+        }
     }
 
     private List<Item> toDoListTasks;
@@ -34,6 +37,10 @@ public final class ToDoList {
 
     final public int getLength(){
         return toDoListTasks.size();
+    }
+
+    final public Item getIndex(int index){
+        return toDoListTasks.get(index);
     }
 
 }

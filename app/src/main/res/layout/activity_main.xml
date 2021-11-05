@@ -3,26 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTodo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="New Task"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addTaskButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/addTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="620dp"
-        android:onClick="onBtnClick"
-        android:text="@string/add_button"
+        android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/todoList"-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="662dp"-->
-<!--        tools:layout_editor_absoluteX="1dp"-->
-<!--        tools:layout_editor_absoluteY="68dp" />-->
+    <!--        android:id="@+id/todoList"-->
+    <!--        android:layout_width="409dp"-->
+    <!--        android:layout_height="662dp"-->
+    <!--        tools:layout_editor_absoluteX="1dp"-->
+    <!--        tools:layout_editor_absoluteY="68dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

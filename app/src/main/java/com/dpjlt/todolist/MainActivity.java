@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     private static ToDoList toDoList = AppLaunch.getToDoList();
-    public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter(toDoList);
+    public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
     private EditText editTodo;
 
     @Override
@@ -26,23 +26,19 @@ public class MainActivity extends AppCompatActivity {
         //bind the recyclerview
         rvTodoList.setAdapter(mTodoListAdapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
-
         this.setupEditTextListener();
         // start up task for testing : )
-        toDoList.addItem("WOW");
+//        toDoList.addItem("WOW");
     }
 
     public void addTask (View view){
-        toDoList.addItem(editTodo.getText().toString());
+        toDoList.addItem(editTodo.getText().toString(), mTodoListAdapter);
         editTodo.setText("");
         // close the keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public void removeTask (View view){
-//        toDoList.removeItem();
-    }
 
     private void setupEditTextListener(){
         editTodo = findViewById(R.id.editTodo);

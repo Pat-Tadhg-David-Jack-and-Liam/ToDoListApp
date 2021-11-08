@@ -20,7 +20,6 @@ public final class ToDoList {
     }
 
     private List<Item> toDoListTasks;
-//    private TodoItemsAdapter mTodoItemsAdapter = MainActivity.mTodoListAdapter;
 
 
     public ToDoList(){
@@ -30,11 +29,18 @@ public final class ToDoList {
     final public void addItem(String taskHeading){
         Item newItem = new Item(taskHeading);
         toDoListTasks.add(newItem);
-//        mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
     }
 
-    final public void removeItem(Item item){
+    final public void addItem(String taskHeading, TodoItemsAdapter mTodoItemsAdapter){
+        Item newItem = new Item(taskHeading);
+        toDoListTasks.add(newItem);
+        mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
+    }
+
+    final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter){
+        int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
+        mTodoItemsAdapter.notifyItemRemoved(index);
     }
 
     final public int getLength(){

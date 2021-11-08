@@ -1,5 +1,8 @@
 package com.dpjlt.todolist;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,13 @@ public final class ToDoList {
 
     final public Item getIndex(int index){
         return toDoListTasks.get(index);
+    }
+
+    public static void addTaskDB(SQLiteDatabase db, Item task) {
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", task.getTaskHeading());
+        db.insert("TASKS", null, taskValues);
+
     }
 
 }

@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="addTask"/>
 
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->

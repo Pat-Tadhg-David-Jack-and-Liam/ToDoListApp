@@ -58,8 +58,14 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         return new ViewHolder(todoItemView);
     }
 
+    /**
+     * God knows what this does but we shouldn't need to call it anyways
+     * @param holder viewholder we created earlier
+     * @param position position in list of model we are currently using
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= todoList.getLength())
+     */
     @Override
-    public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) throws IndexOutOfBoundsException {
         ToDoList.Item item = todoList.getIndex(position);
 
         holder.textTask.setText(item.getTaskHeading());

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainActivity extends AppCompatActivity {
     // todo make private and access with getter
     public static ToDoList toDoList = AppLaunch.toDoList;
+    //RecyclerView recyclerView;
 
     // add task popup, Pat
     // it keeps crashing, cant figure out why
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toDoList.addItem("WOW");
 //
-//        // add task popup
+        //recyclerView = findViewById(R.id.recyclerView);
+//
+//
+// add task popup
 //        Button addButton = (Button) findViewById(R.id.addButton);
 //        addButton.setOnClickListener(new View.OnClickListener() {
 //                @Override

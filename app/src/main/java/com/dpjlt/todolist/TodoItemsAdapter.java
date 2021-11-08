@@ -37,7 +37,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         }
     }
 
-    private ToDoList todoList;
+    private final ToDoList todoList;
 
     /**
      * @param todoList the list of to-do items to add
@@ -60,12 +60,13 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) {
-        //todo
+        ToDoList.Item item = todoList.getIndex(position);
+
+        holder.textTask.setText(item.getTaskHeading());
     }
 
     @Override
     public int getItemCount() {
-        //todo
-        return 0;
+        return todoList.getLength();
     }
 }

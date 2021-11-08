@@ -24,6 +24,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         public TextView textTask;
         public CheckBox check;
         public Button removeTaskButton;
+        public ToDoList.Item toDoListItem;
 
         /**
          * @param itemView the entire item row (item_todo.xml)
@@ -34,16 +35,25 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
+
+            removeTaskButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter);
+                }
+            }
+            );
+
         }
     }
 
-    private final ToDoList todoList;
+    private static final ToDoList todoList = AppLaunch.getToDoList();
 
     /**
      * @param todoList the list of to-do items to add
      */
-    public TodoItemsAdapter(ToDoList todoList){
-        this.todoList=todoList;
+    public TodoItemsAdapter(){
+
     }
 
 
@@ -67,7 +77,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) throws IndexOutOfBoundsException {
         ToDoList.Item item = todoList.getIndex(position);
-
+        holder.toDoListItem = item;
         holder.textTask.setText(item.getTaskHeading());
     }
 

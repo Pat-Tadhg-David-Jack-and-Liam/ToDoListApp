@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     // todo make private and access with getter
@@ -23,8 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toDoList.addItem("WOW");
 
-//         RecyclerView rvTodoList = (RecyclerView) findViewById(R.id.);
-//         bind the recyclerview
+        RecyclerView rvTodoList = findViewById(R.id.recyclerView);
+        //bind the recyclerview
+        TodoItemsAdapter adapter = new TodoItemsAdapter(toDoList);
+        rvTodoList.setAdapter(adapter);
+        rvTodoList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void addTask (View view){

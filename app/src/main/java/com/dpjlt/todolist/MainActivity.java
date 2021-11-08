@@ -1,7 +1,6 @@
 package com.dpjlt.todolist;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     // todo make private and access with getter
-    public static ToDoList toDoList = AppLaunch.toDoList;
+    private static ToDoList toDoList = AppLaunch.getToDoList();
 
-    // add task popup, Pat
-    // it keeps crashing, cant figure out why
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private EditText newTaskPopup;
@@ -27,48 +24,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toDoList.addItem("WOW");
-//
-//        // add task popup
-//        Button addButton = (Button) findViewById(R.id.addButton);
-//        addButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    startActivity(new Intent(MainActivity.this, Pop.class));
-//                }
-//        });
 
-        RecyclerView rvTodoList = findViewById(R.id.todoList);
-         //bind the recyclerview
+        RecyclerView rvTodoList = findViewById(R.id.recyclerView);
+        //bind the recyclerview
         TodoItemsAdapter adapter = new TodoItemsAdapter(toDoList);
         rvTodoList.setAdapter(adapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void onBtnClick (View view){
-        createNewTaskDialog();
-//         TextView txtHello = findViewById(R.id.textJack);
-//         EditText Object type to take user input
-//         Plain Text in xml
-//         EditText editTxt = findViewById(R.id.edittxt);
-//         txtHello.setText(editTxt.getText());
-//        this.addTask();
-    }
-
-    public void createNewTaskDialog() {
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View taskPopupView = getLayoutInflater().inflate(R.layout.popup_for_add_task, null );
-
-        newTaskPopup = taskPopupView.findViewById(R.id.addTaskButton);
-
-        dialogBuilder.setView(taskPopupView);
-        dialog = dialogBuilder.create();
-        dialog.show();
-
-        newTaskPopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // this is where we add the task to list, idk how yet
-            }
-        });
+    public void addTask (View view){
+        EditText editTodo = findViewById(R.id.editTodo);
+        toDoList.addItem(editTodo.getText().toString());
+        editTodo.setText("");
     }
 }

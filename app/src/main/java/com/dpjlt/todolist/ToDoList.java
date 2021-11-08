@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ToDoList {
-    private class Item {
+    public class Item {
         private String taskHeading;
 
         private Item(String taskHeading){

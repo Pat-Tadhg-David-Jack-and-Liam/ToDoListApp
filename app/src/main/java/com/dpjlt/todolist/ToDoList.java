@@ -39,7 +39,13 @@ public final class ToDoList {
         return toDoListTasks.size();
     }
 
-    final public Item getIndex(int index){
+    /**
+     * Get the item at a particular index in the list
+     * @param index index of the item to get
+     * @return The item at <i>index</i> in toDoListTasks
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= getLength())
+     */
+    final public Item getIndex(int index) throws IndexOutOfBoundsException{
         return toDoListTasks.get(index);
     }
 

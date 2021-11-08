@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //        });
 
-        // RecyclerView rvTodoList = (RecyclerView) findViewById(R.id.)
-        // bind the recyclerview
+        RecyclerView rvTodoList = findViewById(R.id.todoList);
+         //bind the recyclerview
+        TodoItemsAdapter adapter = new TodoItemsAdapter(toDoList);
+        rvTodoList.setAdapter(adapter);
+        rvTodoList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void onBtnClick (View view){

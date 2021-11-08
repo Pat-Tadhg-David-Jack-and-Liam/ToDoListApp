@@ -3,17 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
         <entry key="../../../layout/custom_preview.xml" value="0.25462962962962965" />
-        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/home_page.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/item_todo.xml" value="0.3333333333333333" />
-=======
-        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
->>>>>>> cb91d5061732356f3c2f9755d2b3e6798da5e885
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/home_page.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_todo.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/add_task_popup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_task_window.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/home_page.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/layout/popup_for_add_task.xml" value="0.33" />
       </map>
     </option>
   </component>

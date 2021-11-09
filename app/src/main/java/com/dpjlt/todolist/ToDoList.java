@@ -1,5 +1,8 @@
 package com.dpjlt.todolist;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,7 @@ public final class ToDoList {
     private List<Item> toDoListTasks;
 
 
+
     public ToDoList(){
         toDoListTasks = new ArrayList<Item>();
     }
@@ -35,6 +39,7 @@ public final class ToDoList {
         Item newItem = new Item(taskHeading);
         toDoListTasks.add(newItem);
         mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
+
     }
 
     final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter){
@@ -55,6 +60,13 @@ public final class ToDoList {
      */
     final public Item getIndex(int index) throws IndexOutOfBoundsException{
         return toDoListTasks.get(index);
+    }
+
+    public static void addTaskDB(SQLiteDatabase db, Item task) {
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", task.getTaskHeading());
+        db.insert("TASKS", null, taskValues);
+
     }
 
 }

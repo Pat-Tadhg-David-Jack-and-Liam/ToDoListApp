@@ -1,6 +1,10 @@
 package com.dpjlt.todolist;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private static ToDoList toDoList = AppLaunch.getToDoList();
     public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
     private EditText editTodo;
+    public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
+
+//    private SQLiteDatabase dbWrite = this.getWritableDatabase();
+//    private SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+//    private Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+//            null,null,null,null,null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +37,35 @@ public class MainActivity extends AppCompatActivity {
         rvTodoList.setAdapter(mTodoListAdapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
         this.setupEditTextListener();
+
+
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+           null,null,null,null,null);
         // start up task for testing : )
 //        toDoList.addItem("WOW");
+        if(cursor.moveToFirst()){
+            String taskName = cursor.getString(1);
+            toDoList.addItem(taskName);
+            while(cursor.moveToNext()){
+                taskName = cursor.getString(1);
+                toDoList.addItem(taskName);
+            }
+
+        }
+
+    }
+    
+    public void addTaskToDB (String taskName){
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", taskName);
+        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
     }
 
     public void addTask (View view){
-        toDoList.addItem(editTodo.getText().toString(), mTodoListAdapter);
+        String taskName = editTodo.getText().toString();
+        toDoList.addItem(taskName, mTodoListAdapter);
+        addTaskToDB(taskName);
         editTodo.setText("");
         // close the keyboard
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -1,6 +1,7 @@
 package com.dpjlt.todolist;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,21 +26,22 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         public CheckBox check;
         public Button removeTaskButton;
         public ToDoList.Item toDoListItem;
+        public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this.itemView.getContext());
+
 
         /**
          * @param itemView the entire item row (item_todo.xml)
          */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
-
             removeTaskButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter);
+                    toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
                 }
             }
             );

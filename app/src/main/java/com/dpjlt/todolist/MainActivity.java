@@ -1,72 +1,91 @@
 package com.dpjlt.todolist;
 
-import android.app.AlertDialog;
-import android.content.Intent;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
-    // todo make private and access with getter
-    public static ToDoList toDoList = AppLaunch.toDoList;
+    private static ToDoList toDoList = AppLaunch.getToDoList();
+    public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
+    private EditText editTodo;
+    public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
 
-    // add task popup, Pat
-    // it keeps crashing, cant figure out why
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-    private EditText newTaskPopup;
-    private Button newTaskSaveButton;
+//    private SQLiteDatabase dbWrite = this.getWritableDatabase();
+//    private SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+//    private Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+//            null,null,null,null,null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toDoList.addItem("WOW");
-//
-//        // add task popup
-//        Button addButton = (Button) findViewById(R.id.addButton);
-//        addButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    startActivity(new Intent(MainActivity.this, Pop.class));
-//                }
-//        });
+        RecyclerView rvTodoList = findViewById(R.id.rvTodoList);
+        //bind the recyclerview
+        rvTodoList.setAdapter(mTodoListAdapter);
+        rvTodoList.setLayoutManager(new LinearLayoutManager(this));
+        this.setupEditTextListener();
 
-        // RecyclerView rvTodoList = (RecyclerView) findViewById(R.id.)
-        // bind the recyclerview
+
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+           null,null,null,null,null);
+        // start up task for testing : )
+//        toDoList.addItem("WOW");
+        if(cursor.moveToFirst()){
+            String taskName = cursor.getString(1);
+            toDoList.addItem(taskName);
+            while(cursor.moveToNext()){
+                taskName = cursor.getString(1);
+                toDoList.addItem(taskName);
+            }
+
+        }
+
+    }
+    
+    public void addTaskToDB (String taskName){
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", taskName);
+        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
     }
 
-    public void onBtnClick (View view){
-        createNewTaskDialog();
-//         TextView txtHello = findViewById(R.id.textJack);
-//         EditText Object type to take user input
-//         Plain Text in xml
-//         EditText editTxt = findViewById(R.id.edittxt);
-//         txtHello.setText(editTxt.getText());
-//        this.addTask();
+    public void addTask (View view){
+        String taskName = editTodo.getText().toString();
+        toDoList.addItem(taskName, mTodoListAdapter);
+        addTaskToDB(taskName);
+        editTodo.setText("");
+        // close the keyboard
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 
-    public void createNewTaskDialog() {
-        dialogBuilder = new AlertDialog.Builder(this);
-        //final View taskPopupView = getLayoutInflater().inflate(R.layout.popup_for_add_task, null );
-
-
-       // newTaskPopup = taskPopupView.findViewById(R.id.addTaskButton);
-
-       // dialogBuilder.setView(taskPopupView);
-        dialog = dialogBuilder.create();
-        dialog.show();
-
-        newTaskPopup.setOnClickListener(new View.OnClickListener() {
+    private void setupEditTextListener(){
+        editTodo = findViewById(R.id.editTodo);
+        editTodo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View view) {
-                // this is where we add the task to list, idk how yet
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    addTask(textView);
+                    return true;
+                }
+                return false;
             }
         });
     }
+
+
 }

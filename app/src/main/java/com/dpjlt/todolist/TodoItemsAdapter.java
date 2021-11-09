@@ -51,9 +51,6 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
 
     private static final ToDoList todoList = AppLaunch.getToDoList();
 
-    /**
-     * @param todoList the list of to-do items to add
-     */
     public TodoItemsAdapter(){
 
     }

@@ -23,11 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTodo;
     public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
 
-//    private SQLiteDatabase dbWrite = this.getWritableDatabase();
-//    private SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-//    private Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
-//            null,null,null,null,null);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,16 +35,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
            null,null,null,null,null);
-        // start up task for testing : )
-//        toDoList.addItem("WOW");
+
         if(cursor.moveToFirst()){
             String taskName = cursor.getString(1);
-            toDoList.addItem(taskName);
+            boolean taskChecked = cursor.getInt(2) > 0;
+            toDoList.addItem(taskName, taskChecked);
             while(cursor.moveToNext()){
                 taskName = cursor.getString(1);
-                toDoList.addItem(taskName);
+                taskChecked = cursor.getInt(2) > 0;
+                toDoList.addItem(taskName,taskChecked);
             }
 
         }
@@ -59,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public void addTaskToDB (String taskName){
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", taskName);
+        taskValues.put("TASK_CHECKED", false);
         toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
     }
 

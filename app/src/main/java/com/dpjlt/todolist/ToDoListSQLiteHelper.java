@@ -20,7 +20,7 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Tasks";
     // For version control. Makes it easier to make changes and make rollbacks
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Context is the activity it's in
     // null is something to do with cursors not sure what
@@ -44,6 +44,9 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
     // the modifications are to be made in this method
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        if ( oldVersion < 2 ) {
+            db.execSQL("ALTER TABLE TASKS ADD COLUMN TASK_CHECKED NUMERIC DEFAULT 0");
+        }
     }
 
 //    public static void addTaskDB(SQLiteDatabase db, Item task) {

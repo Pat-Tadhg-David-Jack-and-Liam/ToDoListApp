@@ -115,4 +115,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="390dp" />
 
+    <EditText
+        android:id="@+id/editTodo"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="New Task"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="82dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

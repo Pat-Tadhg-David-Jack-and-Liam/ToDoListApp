@@ -36,7 +36,8 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         // All SQL to be executed must be done in the method execSQL(String sqlStatement) on DB
         db.execSQL("CREATE TABLE TASKS (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "TASK_NAME TEXT)");
+                "TASK_NAME TEXT," +
+                "ASK_CHECKED NUMERIC)");
 
     }
 

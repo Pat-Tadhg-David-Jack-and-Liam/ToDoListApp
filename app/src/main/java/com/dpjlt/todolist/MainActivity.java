@@ -2,6 +2,7 @@ package com.dpjlt.todolist;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,11 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTodo;
     public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
 
-//    private SQLiteDatabase dbWrite = this.getWritableDatabase();
-//    private SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-//    private Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
-//            null,null,null,null,null);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,55 +33,64 @@ public class MainActivity extends AppCompatActivity {
         //bind the recyclerview
         rvTodoList.setAdapter(mTodoListAdapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
-        this.setupEditTextListener();
+//        this.setupEditTextListener();
 
 
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME"},
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
            null,null,null,null,null);
-        // start up task for testing : )
-//        toDoList.addItem("WOW");
+
         if(cursor.moveToFirst()){
             String taskName = cursor.getString(1);
-            toDoList.addItem(taskName);
+            boolean taskChecked = cursor.getInt(2) > 0;
+            toDoList.addItem(taskName, taskChecked);
             while(cursor.moveToNext()){
                 taskName = cursor.getString(1);
-                toDoList.addItem(taskName);
+                taskChecked = cursor.getInt(2) > 0;
+                toDoList.addItem(taskName,taskChecked);
             }
 
         }
+
 
     }
     
     public void addTaskToDB (String taskName){
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", taskName);
+        taskValues.put("TASK_CHECKED", false);
         toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
     }
 
-    public void addTask (View view){
-        String taskName = editTodo.getText().toString();
-        toDoList.addItem(taskName, mTodoListAdapter);
-        addTaskToDB(taskName);
-        editTodo.setText("");
+//    public void addTask (View view){
+//        openEditTaskScreen();
+//        String taskName = editTodo.getText().toString();
+//        toDoList.addItem(taskName, mTodoListAdapter);
+//        addTaskToDB(taskName);
+//        editTodo.setText("");
         // close the keyboard
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
+//        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//    }
 
+//
+//    private void setupEditTextListener(){
+//        editTodo = findViewById(R.id.editTodo);
+//        editTodo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    addTask(textView);
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+//    }
 
-    private void setupEditTextListener(){
-        editTodo = findViewById(R.id.editTodo);
-        editTodo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    addTask(textView);
-                    return true;
-                }
-                return false;
-            }
-        });
+    public void openEditTaskScreen(View view) {
+        Intent intent = new Intent(this, AddEditItemActivity.class);
+        startActivity(intent);
     }
 
 

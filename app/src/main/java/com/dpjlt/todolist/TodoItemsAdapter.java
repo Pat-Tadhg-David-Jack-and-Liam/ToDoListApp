@@ -1,5 +1,6 @@
 package com.dpjlt.todolist;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.LayoutInflater;
@@ -43,8 +44,16 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
                     todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter);
                     toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
                 }
-            }
-            );
+            });
+            check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toDoListItem.setChecked(((CheckBox) v).isChecked());
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
+                    toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
+                }
+            });
 
         }
     }
@@ -74,6 +83,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
     public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) throws IndexOutOfBoundsException {
         ToDoList.Item item = todoList.getIndex(position);
         holder.toDoListItem = item;
+        holder.check.setChecked(item.getChecked());
         holder.textTask.setText(item.getTaskHeading());
     }
 

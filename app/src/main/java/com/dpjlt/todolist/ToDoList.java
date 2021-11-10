@@ -9,11 +9,22 @@ import java.util.List;
 public final class ToDoList {
     public class Item {
         private String taskHeading;
+        private boolean checked;
 
+        private Item(String taskHeading, boolean checked){
+            this.taskHeading = taskHeading;
+            this.checked = checked;
+        }
         private Item(String taskHeading){
             this.taskHeading = taskHeading;
+            this.checked = false;
         }
-
+        final public boolean getChecked(){
+            return checked;
+        }
+        final public void setChecked(boolean value){
+            checked = value;
+        }
         final public String getTaskHeading() {
             return taskHeading;
         }
@@ -25,13 +36,12 @@ public final class ToDoList {
     private List<Item> toDoListTasks;
 
 
-
     public ToDoList(){
         toDoListTasks = new ArrayList<Item>();
     }
 
-    final public void addItem(String taskHeading){
-        Item newItem = new Item(taskHeading);
+    final public void addItem(String taskHeading, boolean checked){
+        Item newItem = new Item(taskHeading, checked);
         toDoListTasks.add(newItem);
     }
 

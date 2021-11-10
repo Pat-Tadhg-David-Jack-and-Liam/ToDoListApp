@@ -8,27 +8,70 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTodoList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="133dp" />
 
-    <EditText
-        android:id="@+id/editTodo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="New Task"
-        android:maxLength="15"
-        android:inputType="text"
-        android:imeOptions="actionDone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addTaskButton"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <Button-->
 
-    <Button
-        android:id="@+id/addTaskButton"
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginEnd="256dp"-->
+<!--        android:layout_marginBottom="236dp"-->
+<!--        android:onClick="openEditTaskScreen"-->
+<!--        android:text="Add"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Task"
+        android:onClick="openEditTaskScreen"
+        android:src="@drawable/ic_baseline_add"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="addTask"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--    <EditText-->
+<!--        android:id="@+id/editTodo"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="New Task"-->
+<!--        android:maxLength="15"-->
+<!--        android:inputType="text"-->
+<!--        android:imeOptions="actionDone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/button"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:onClick="openEditTaskScreen"-->
+<!--        android:text="Add Task"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/rvTodoList"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.947"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end|bottom"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="32dp"-->
+<!--        android:src="@drawable/ic_baseline_add"-->
+<!--        tools:layout_editor_absoluteX="339dp"-->
+<!--        tools:layout_editor_absoluteY="659dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+
+<!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

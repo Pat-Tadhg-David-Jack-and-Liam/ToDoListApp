@@ -17,7 +17,7 @@ public class AddEditItemActivity extends AppCompatActivity {
     private Spinner dropdown;
     private static ToDoList toDoList = AppLaunch.getToDoList();
     public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
-    private EditText editTodo;
+//    private EditText editName;
     public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
 
 
@@ -40,24 +40,25 @@ public class AddEditItemActivity extends AppCompatActivity {
     }
 
     public void addTask (View view) {
-        String taskName = editTodo.getText().toString();
+        EditText editName = findViewById(R.id.editName);
+        EditText editDueDate = findViewById(R.id.editDueDate);
+        EditText editTag = findViewById(R.id.editTag);
+        String taskName = editName.getText().toString();
+        String dueDate = editDueDate.getText().toString();
+        String tagName = editTag.getText().toString();
         toDoList.addItem(taskName, mTodoListAdapter);
         addTaskToDB(taskName);
-        editTodo.setText("");
-//      close the keyboard
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//        editName.setText("");
+////      close the keyboard
+//        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         saveTask(view);
     }
 
     public void saveTask(View view) {
 //        EditText editName = findViewById(R.id.editName);
-//        EditText editDueDate = findViewById(R.id.editDueDate);
-//        EditText editTag = findViewById(R.id.editTag);
 //
 //        String taskName = editName.getText().toString();
-//        String dueDate = editDueDate.getText().toString();
-//        String tagName = editTag.getText().toString();
 
         Intent intent = new Intent(this, MainActivity.class);
 

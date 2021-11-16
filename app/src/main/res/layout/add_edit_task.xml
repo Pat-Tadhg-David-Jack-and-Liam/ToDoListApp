@@ -14,6 +14,7 @@
         android:hint="New Task"
         android:inputType="text"
         android:textAlignment="center"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
         android:hint="Due Date"
         android:inputType="date"
         android:textAlignment="center"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="@+id/editName"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
@@ -40,6 +42,7 @@
         android:hint="Tag"
         android:inputType="text"
         android:textAlignment="center"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="@+id/editName"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
@@ -55,11 +58,11 @@
 
     <Button
         android:id="@+id/addTaskButton"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="460dp"
-        android:text="Save"
+        android:layout_marginTop="356dp"
         android:onClick="addTask"
+        android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

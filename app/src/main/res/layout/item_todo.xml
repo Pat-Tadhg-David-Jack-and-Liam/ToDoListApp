@@ -8,37 +8,65 @@
 
     <TextView
         android:id="@+id/textTask"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="Task"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/check"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/removeTaskButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="90dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textTask" />
 
     <Button
         android:id="@+id/removeTaskButton"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="77dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         android:backgroundTint="#BC2121"
+        android:onClick="removeTask"
         android:text="Remove"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="12sp"
-        android:onClick="removeTask"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textTask"
+        app:layout_constraintStart_toEndOf="@+id/check"
+        app:layout_constraintTop_toTopOf="@+id/textTask"
         app:strokeColor="#8F1E1E" />
+
+    <TextView
+        android:id="@+id/textTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Tag"
+        app:layout_constraintStart_toStartOf="@+id/textTask"
+        app:layout_constraintTop_toBottomOf="@+id/textTask" />
+
+    <TextView
+        android:id="@+id/textDueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Due Date"
+        app:layout_constraintStart_toEndOf="@+id/textTag"
+        app:layout_constraintTop_toTopOf="@+id/textTag" />
+
+    <TextView
+        android:id="@+id/textPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Priority"
+        app:layout_constraintStart_toEndOf="@+id/textDueDate"
+        app:layout_constraintTop_toTopOf="@+id/textTag" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

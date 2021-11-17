@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/add_task_window.xml" value="0.33" />
         <entry key="app/src/main/res/layout/edit_task.xml" value="0.24320652173913043" />
         <entry key="app/src/main/res/layout/home_page.xml" value="0.15572916666666667" />
-        <entry key="app/src/main/res/layout/item_todo.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/item_todo.xml" value="0.45" />
         <entry key="app/src/main/res/layout/popup_for_add_task.xml" value="0.33" />
       </map>
     </option>

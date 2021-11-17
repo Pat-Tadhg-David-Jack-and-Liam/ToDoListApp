@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addTask (View view){
         String taskName = editTodo.getText().toString();
-        toDoList.addItem(taskName, mTodoListAdapter);
+        toDoList.addItem(taskName, false, mTodoListAdapter);
         addTaskToDB(taskName);
         editTodo.setText("");
         // close the keyboard

@@ -40,14 +40,24 @@ public final class ToDoList {
         toDoListTasks = new ArrayList<Item>();
     }
 
-    final public void addItem(String taskHeading, boolean checked){
-        Item newItem = new Item(taskHeading, checked);
-        toDoListTasks.add(newItem);
+    /**
+     *
+     * @param taskHeading title of the task
+     * @param checked if the task is completed
+     * @throws IllegalArgumentException when task heading > 100 chars
+     */
+    final public void addItem(String taskHeading, boolean checked) throws IllegalArgumentException{
+        if(taskHeading.length() < 100) {
+            Item newItem = new Item(taskHeading, checked);
+            toDoListTasks.add(newItem);
+        } else {
+            throw new IllegalArgumentException("task heading must be less than 100 chars");
+        }
+
     }
 
-    final public void addItem(String taskHeading, TodoItemsAdapter mTodoItemsAdapter){
-        Item newItem = new Item(taskHeading);
-        toDoListTasks.add(newItem);
+    final public void addItem(String taskHeading,boolean checked, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException{
+        this.addItem(taskHeading, checked);
         mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
 
     }

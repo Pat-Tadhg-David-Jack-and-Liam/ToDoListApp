@@ -26,13 +26,17 @@ public class AddEditItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_edit_task);
 
-        dropdown =  findViewById(R.id.editPriority);
+        // set up the priorities dropdown menu
+        dropdown =  findViewById(R.id.priority);
         String[] priorities = new String[]{"No Priority", "Low", "Medium", "High"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, priorities);
         dropdown.setAdapter(adapter);
     }
 
     public void addTaskToDB (String taskName){
+        addTaskToDB(taskName, null, null, null);
+    }
+    public void addTaskToDB (String taskName, String dueDate, String tag, String priority) {
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", taskName);
         taskValues.put("TASK_CHECKED", false);
@@ -40,12 +44,16 @@ public class AddEditItemActivity extends AppCompatActivity {
     }
 
     public void addTask (View view) {
-        EditText editName = findViewById(R.id.editName);
-        EditText editDueDate = findViewById(R.id.editDueDate);
-        EditText editTag = findViewById(R.id.editTag);
-        String taskName = editName.getText().toString();
-        String dueDate = editDueDate.getText().toString();
-        String tagName = editTag.getText().toString();
+        EditText nameBox = findViewById(R.id.name);
+        EditText dueDateBox = findViewById(R.id.due_date);
+        EditText tagBox = findViewById(R.id.tag);
+        Spinner priorityDropdown = findViewById(R.id.priority);
+
+        String taskName = nameBox.getText().toString();
+        String dueDate = dueDateBox.getText().toString();
+        String tagName = tagBox.getText().toString();
+        String priorityLevel = priorityDropdown.getSelectedItem().toString();
+
         toDoList.addItem(taskName, mTodoListAdapter);
         addTaskToDB(taskName);
 //        editName.setText("");
@@ -56,12 +64,7 @@ public class AddEditItemActivity extends AppCompatActivity {
     }
 
     public void saveTask(View view) {
-//        EditText editName = findViewById(R.id.editName);
-//
-//        String taskName = editName.getText().toString();
-
         Intent intent = new Intent(this, MainActivity.class);
-
         startActivity(intent);
     }
 }

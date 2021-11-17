@@ -76,7 +76,6 @@ public final class ToDoList {
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", task.getTaskHeading());
         db.insert("TASKS", null, taskValues);
-
     }
 
 }

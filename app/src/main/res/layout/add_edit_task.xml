@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/name"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="80dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editDueDate"
+        android:id="@+id/due_date"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
@@ -30,11 +30,11 @@
         android:inputType="date"
         android:textAlignment="center"
         android:imeOptions="actionDone"
-        app:layout_constraintEnd_toEndOf="@+id/editName"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <EditText
-        android:id="@+id/editTag"
+        android:id="@+id/tag"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="120dp"
@@ -43,18 +43,18 @@
         android:inputType="text"
         android:textAlignment="center"
         android:imeOptions="actionDone"
-        app:layout_constraintEnd_toEndOf="@+id/editName"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Spinner
-        android:id="@+id/editPriority"
+        android:id="@+id/priority"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="200dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="@+id/editName"
-        app:layout_constraintStart_toStartOf="@+id/editName"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
         android:id="@+id/addTaskButton"
@@ -66,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

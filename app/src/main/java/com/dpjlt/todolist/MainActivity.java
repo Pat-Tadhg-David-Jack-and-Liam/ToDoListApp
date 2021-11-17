@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         //bind the recyclerview
         rvTodoList.setAdapter(mTodoListAdapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
+
+        rvTodoList.addItemDecoration(new DividerItemDecoration(rvTodoList.getContext(), DividerItemDecoration.VERTICAL));
+
 //        this.setupEditTextListener();
 
 
@@ -49,18 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 taskChecked = cursor.getInt(2) > 0;
                 toDoList.addItem(taskName,taskChecked);
             }
-
         }
-
-
     }
-    
-    public void addTaskToDB (String taskName){
-        ContentValues taskValues = new ContentValues();
-        taskValues.put("TASK_NAME", taskName);
-        taskValues.put("TASK_CHECKED", false);
-        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
-    }
+//
+//    public void addTaskToDB (String taskName){
+//        ContentValues taskValues = new ContentValues();
+//        taskValues.put("TASK_NAME", taskName);
+//        taskValues.put("TASK_CHECKED", false);
+//        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
+//    }
 
 //    public void addTask (View view){
 //        openEditTaskScreen();

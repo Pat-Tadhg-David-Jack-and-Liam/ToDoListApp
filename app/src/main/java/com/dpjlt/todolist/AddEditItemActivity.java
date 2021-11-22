@@ -54,7 +54,7 @@ public class AddEditItemActivity extends AppCompatActivity {
         String tagName = tagBox.getText().toString();
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
-        toDoList.addItem(taskName, mTodoListAdapter);
+        toDoList.addItem(taskName, false, mTodoListAdapter);
         addTaskToDB(taskName);
 //        editName.setText("");
 ////      close the keyboard

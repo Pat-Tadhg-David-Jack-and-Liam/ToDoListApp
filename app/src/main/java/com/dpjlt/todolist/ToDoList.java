@@ -35,9 +35,11 @@ public final class ToDoList {
     }
 
     private List<Item> toDoListTasks;
+    private ToDoListSQLiteHelper toDoListDatabaseHelper;
 
 
     public ToDoList(ToDoListSQLiteHelper toDoListDatabaseHelper){
+        this.toDoListDatabaseHelper = toDoListDatabaseHelper;
         toDoListTasks = new ArrayList<Item>();
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
         Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
@@ -56,7 +58,7 @@ public final class ToDoList {
     }
 
     /**
-     *
+     * Method for adding to the list when the App starts
      * @param taskHeading title of the task
      * @param checked if the task is completed
      * @throws IllegalArgumentException when task heading > 100 chars
@@ -70,9 +72,18 @@ public final class ToDoList {
         }
 
     }
-
+    /**
+     * Method for adding new  items to the list
+     * @param taskHeading title of the task
+     * @param checked if the task is completed
+     * @throws IllegalArgumentException when task heading > 100 chars
+     */
     final public void addItem(String taskHeading,boolean checked, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException{
         this.addItem(taskHeading, checked);
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", taskHeading);
+        taskValues.put("TASK_CHECKED", checked);
+        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
         mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
 
     }
@@ -80,6 +91,7 @@ public final class ToDoList {
     final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter){
         int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
+        toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {item.getTaskHeading()});
         mTodoItemsAdapter.notifyItemRemoved(index);
     }
 

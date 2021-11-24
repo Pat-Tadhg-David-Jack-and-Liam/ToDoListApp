@@ -1,6 +1,5 @@
 package com.dpjlt.todolist;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -31,16 +30,6 @@ public class AddEditItemActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
     }
 
-    public void addTaskToDB (String taskName){
-        addTaskToDB(taskName, null, null, null);
-    }
-    public void addTaskToDB (String taskName, String dueDate, String tag, String priority) {
-        ContentValues taskValues = new ContentValues();
-        taskValues.put("TASK_NAME", taskName);
-        taskValues.put("TASK_CHECKED", false);
-        toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
-    }
-
     public void addTask (View view) {
         EditText nameBox = findViewById(R.id.name);
         EditText dueDateBox = findViewById(R.id.due_date);
@@ -53,7 +42,6 @@ public class AddEditItemActivity extends AppCompatActivity {
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
         toDoList.addItem(taskName, false, mTodoListAdapter);
-        addTaskToDB(taskName);
 //        editName.setText("");
 ////      close the keyboard
 //        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);

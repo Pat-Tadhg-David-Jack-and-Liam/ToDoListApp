@@ -42,7 +42,6 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
                 @Override
                 public void onClick(View v) {
                     todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter);
-                    toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
                 }
             });
             check.setOnClickListener(new View.OnClickListener() {

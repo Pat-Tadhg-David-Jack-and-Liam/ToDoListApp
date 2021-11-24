@@ -1,17 +1,15 @@
 package com.dpjlt.todolist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddEditItemActivity extends AppCompatActivity {
     private Spinner dropdown;
@@ -54,7 +52,7 @@ public class AddEditItemActivity extends AppCompatActivity {
         String tagName = tagBox.getText().toString();
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
-        toDoList.addItem(taskName, mTodoListAdapter);
+        toDoList.addItem(taskName, false, mTodoListAdapter);
         addTaskToDB(taskName);
 //        editName.setText("");
 ////      close the keyboard

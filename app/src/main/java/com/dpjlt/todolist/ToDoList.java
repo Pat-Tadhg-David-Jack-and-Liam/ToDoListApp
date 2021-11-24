@@ -1,6 +1,7 @@
 package com.dpjlt.todolist;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -36,8 +37,22 @@ public final class ToDoList {
     private List<Item> toDoListTasks;
 
 
-    public ToDoList(){
+    public ToDoList(ToDoListSQLiteHelper toDoListDatabaseHelper){
         toDoListTasks = new ArrayList<Item>();
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
+                null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            String taskName = cursor.getString(1);
+            boolean taskChecked = cursor.getInt(2) > 0;
+            this.addItem(taskName, taskChecked);
+            while(cursor.moveToNext()){
+                taskName = cursor.getString(1);
+                taskChecked = cursor.getInt(2) > 0;
+                this.addItem(taskName,taskChecked);
+            }
+        }
     }
 
     /**

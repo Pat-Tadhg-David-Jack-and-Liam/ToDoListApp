@@ -1,19 +1,9 @@
 package com.dpjlt.todolist;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -24,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private static ToDoList toDoList = AppLaunch.getToDoList();
     public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
     private EditText editTodo;
-    public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +30,7 @@ public class MainActivity extends AppCompatActivity {
 //        this.setupEditTextListener();
 
 
-        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
-           null,null,null,null,null);
 
-        if(cursor.moveToFirst()){
-            String taskName = cursor.getString(1);
-            boolean taskChecked = cursor.getInt(2) > 0;
-            toDoList.addItem(taskName, taskChecked);
-            while(cursor.moveToNext()){
-                taskName = cursor.getString(1);
-                taskChecked = cursor.getInt(2) > 0;
-                toDoList.addItem(taskName,taskChecked);
-            }
-        }
     }
 //
 //    public void addTaskToDB (String taskName){

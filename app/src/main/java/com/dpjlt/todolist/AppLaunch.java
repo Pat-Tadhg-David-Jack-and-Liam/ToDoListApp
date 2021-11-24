@@ -13,11 +13,12 @@ public class AppLaunch extends Application {
      * create the list of todos
      * todo add the database stuff here too
      */
-    public AppLaunch(){
-        toDoList = new ToDoList();
+    public void onCreate() {
+        super.onCreate();
+        final ToDoListSQLiteHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(getApplicationContext());
+        toDoList = new ToDoList(toDoListDatabaseHelper);
         Log.i("main", "Constructor fired");
     }
-
     public static ToDoList getToDoList() {
         return toDoList;
     }

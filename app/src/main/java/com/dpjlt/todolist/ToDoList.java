@@ -109,10 +109,4 @@ public final class ToDoList {
         return toDoListTasks.get(index);
     }
 
-    public static void addTaskDB(SQLiteDatabase db, Item task) {
-        ContentValues taskValues = new ContentValues();
-        taskValues.put("TASK_NAME", task.getTaskHeading());
-        db.insert("TASKS", null, taskValues);
-    }
-
 }

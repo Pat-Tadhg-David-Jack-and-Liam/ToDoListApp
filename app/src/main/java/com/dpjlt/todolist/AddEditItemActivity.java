@@ -1,7 +1,6 @@
 package com.dpjlt.todolist;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,9 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddEditItemActivity extends AppCompatActivity {
     private Spinner dropdown;
     private static ToDoList toDoList = AppLaunch.getToDoList();
-    public static TodoItemsAdapter mTodoListAdapter = new TodoItemsAdapter();
+    public static TodoItemsAdapter mTodoListAdapter = MainActivity.mTodoListAdapter;
 //    private EditText editName;
-    public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this);
 
 
     @Override
@@ -48,6 +46,8 @@ public class AddEditItemActivity extends AppCompatActivity {
 //        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         saveTask(view);
     }
+
+
 
     public void saveTask(View view) {
         Intent intent = new Intent(this, MainActivity.class);

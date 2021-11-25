@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.util.Calendar;
 
 public class AddEditItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
@@ -32,7 +33,7 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
         dropdown.setAdapter(adapter);
     }
 
-    public void addTask (View view) {
+    public void addTask (View view) throws ParseException {
         EditText nameBox = findViewById(R.id.name);
         EditText tagBox = findViewById(R.id.tag);
         Spinner priorityDropdown = findViewById(R.id.priority);
@@ -42,7 +43,7 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
         String tagName = tagBox.getText().toString();
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
-        toDoList.addItem(taskName, false, mTodoListAdapter);
+        toDoList.addItem(taskName, false, dueDate, mTodoListAdapter);
         saveTask(view);
     }
 

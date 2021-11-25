@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +12,12 @@ public final class ToDoList {
     public class Item {
         private String taskHeading;
         private boolean checked;
+        private String dueDate;
 
-        private Item(String taskHeading, boolean checked){
+        private Item(String taskHeading, boolean checked,String dueDate){
             this.taskHeading = taskHeading;
             this.checked = checked;
-        }
-        private Item(String taskHeading){
-            this.taskHeading = taskHeading;
-            this.checked = false;
+            this.dueDate = dueDate;
         }
         final public boolean getChecked(){
             return checked;
@@ -29,6 +28,11 @@ public final class ToDoList {
         final public String getTaskHeading() {
             return taskHeading;
         }
+
+        final public String getDueDate() {
+            return dueDate;
+        }
+
         final public void setTaskHeading(String taskHeading) {
             this.taskHeading = taskHeading;
         }
@@ -40,21 +44,24 @@ public final class ToDoList {
 
     public ToDoList(ToDoListSQLiteHelper toDoListDatabaseHelper){
         this.toDoListDatabaseHelper = toDoListDatabaseHelper;
-        toDoListTasks = new ArrayList<Item>();
+        toDoListTasks = new ArrayList<>();
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED"},
+        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED, TASK_DATE"},
                 null,null,null,null,null);
 
         if(cursor.moveToFirst()){
             String taskName = cursor.getString(1);
             boolean taskChecked = cursor.getInt(2) > 0;
-            this.addItem(taskName, taskChecked);
+            String dueDate = cursor.getString(3);
+            this.addItem(taskName, taskChecked, dueDate);
             while(cursor.moveToNext()){
                 taskName = cursor.getString(1);
                 taskChecked = cursor.getInt(2) > 0;
-                this.addItem(taskName,taskChecked);
+                dueDate = cursor.getString(3);
+                this.addItem(taskName,taskChecked, dueDate);
             }
         }
+        cursor.close();
     }
 
     /**
@@ -63,9 +70,9 @@ public final class ToDoList {
      * @param checked if the task is completed
      * @throws IllegalArgumentException when task heading > 100 chars
      */
-    final public void addItem(String taskHeading, boolean checked) throws IllegalArgumentException{
+    final public void addItem(String taskHeading, boolean checked, String dueDate) throws IllegalArgumentException{
         if(taskHeading.length() < 100) {
-            Item newItem = new Item(taskHeading, checked);
+            Item newItem = new Item(taskHeading, checked, dueDate);
             toDoListTasks.add(newItem);
         } else {
             throw new IllegalArgumentException("task heading must be less than 100 chars");
@@ -78,11 +85,12 @@ public final class ToDoList {
      * @param checked if the task is completed
      * @throws IllegalArgumentException when task heading > 100 chars
      */
-    final public void addItem(String taskHeading,boolean checked, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException{
-        this.addItem(taskHeading, checked);
+    final public void addItem(String taskHeading,boolean checked, String dueDate, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException, ParseException {
+        this.addItem(taskHeading, checked, dueDate);
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", taskHeading);
         taskValues.put("TASK_CHECKED", checked);
+        taskValues.put("TASK_DATE", dueDate);
         toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
         mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
 

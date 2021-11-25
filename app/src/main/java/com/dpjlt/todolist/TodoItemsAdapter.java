@@ -27,6 +27,8 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         public CheckBox check;
         public Button removeTaskButton;
         public TextView textDueDate;
+        public TextView textTag;
+        public TextView textPriority;
         public ToDoList.Item toDoListItem;
         public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this.itemView.getContext());
 
@@ -39,6 +41,8 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
             textDueDate = itemView.findViewById(R.id.textDueDate);
+            textTag = itemView.findViewById(R.id.textTag);
+            textPriority = itemView.findViewById(R.id.textPriority);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
             removeTaskButton.setOnClickListener(v -> todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter));
             check.setOnClickListener(v -> {
@@ -79,6 +83,8 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         holder.check.setChecked(item.getChecked());
         holder.textTask.setText(item.getTaskHeading());
         holder.textDueDate.setText(item.getDueDate());
+        holder.textTag.setText(item.getTag());
+        holder.textPriority.setText(item.getPriority());
     }
 
     @Override

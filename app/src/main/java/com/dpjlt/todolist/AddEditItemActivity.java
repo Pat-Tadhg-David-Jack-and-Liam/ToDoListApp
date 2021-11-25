@@ -43,7 +43,7 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
         String tagName = tagBox.getText().toString();
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
-        toDoList.addItem(taskName, false, dueDate, mTodoListAdapter);
+        toDoList.addItem(taskName, false, dueDate, tagName, priorityLevel, mTodoListAdapter);
         saveTask(view);
     }
 
@@ -58,12 +58,12 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
         );
         datePickerDialog.show();
     }
+
     @Override
     public void onDateSet (android.widget.DatePicker view, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "/" + month + "/" + year;
         dueDateBox.setText(date);
     }
-
 
     public void saveTask(View view) {
         Intent intent = new Intent(this, MainActivity.class);

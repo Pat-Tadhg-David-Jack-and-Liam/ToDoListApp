@@ -15,17 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Convert a position in the item_todo into a list row item to be inserted
- * @author liam
+ * @author Group 11
  */
 public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.ViewHolder>{
     /**
      * Provides direct reference to each of the views within item_todo.xml
-     * @author liam
+     * @author Group 11
      */
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView textTask;
         public CheckBox check;
         public Button removeTaskButton;
+        public TextView textDueDate;
+        public TextView textTag;
+        public TextView textPriority;
         public ToDoList.Item toDoListItem;
         public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this.itemView.getContext());
 
@@ -37,22 +40,16 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
             super(itemView);
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
+            textDueDate = itemView.findViewById(R.id.textDueDate);
+            textTag = itemView.findViewById(R.id.textTag);
+            textPriority = itemView.findViewById(R.id.textPriority);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
-            removeTaskButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter);
-                    toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
-                }
-            });
-            check.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toDoListItem.setChecked(((CheckBox) v).isChecked());
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
-                    toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
-                }
+            removeTaskButton.setOnClickListener(v -> todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter));
+            check.setOnClickListener(v -> {
+                toDoListItem.setChecked(((CheckBox) v).isChecked());
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
+                toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
             });
 
         }
@@ -85,6 +82,9 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
         holder.toDoListItem = item;
         holder.check.setChecked(item.getChecked());
         holder.textTask.setText(item.getTaskHeading());
+        holder.textDueDate.setText(item.getDueDate());
+        holder.textTag.setText(item.getTag());
+        holder.textPriority.setText(item.getPriority());
     }
 
     @Override

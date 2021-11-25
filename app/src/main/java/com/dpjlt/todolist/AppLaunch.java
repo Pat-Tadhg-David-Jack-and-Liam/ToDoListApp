@@ -9,10 +9,6 @@ import android.util.Log;
 public class AppLaunch extends Application {
     private static ToDoList toDoList;
 
-    /**
-     * create the list of todos
-     * todo add the database stuff here too
-     */
     public void onCreate() {
         super.onCreate();
         final ToDoListSQLiteHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(getApplicationContext());

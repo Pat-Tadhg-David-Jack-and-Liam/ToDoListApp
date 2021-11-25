@@ -52,19 +52,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 //
-//    private void setupEditTextListener(){
-//        editTodo = findViewById(R.id.editTodo);
-//        editTodo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    addTask(textView);
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//    }
+
 
     public void openEditTaskScreen(View view) {
         Intent intent = new Intent(this, AddEditItemActivity.class);

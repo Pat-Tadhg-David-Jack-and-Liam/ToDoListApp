@@ -1,5 +1,6 @@
 package com.dpjlt.todolist;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,17 +10,20 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddEditItemActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class AddEditItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private Spinner dropdown;
+    private EditText dueDateBox;
     private static ToDoList toDoList = AppLaunch.getToDoList();
     public static TodoItemsAdapter mTodoListAdapter = MainActivity.mTodoListAdapter;
-//    private EditText editName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_edit_task);
+        dueDateBox = findViewById(R.id.due_date);
 
         // set up the priorities dropdown menu
         dropdown =  findViewById(R.id.priority);
@@ -30,7 +34,6 @@ public class AddEditItemActivity extends AppCompatActivity {
 
     public void addTask (View view) {
         EditText nameBox = findViewById(R.id.name);
-        EditText dueDateBox = findViewById(R.id.due_date);
         EditText tagBox = findViewById(R.id.tag);
         Spinner priorityDropdown = findViewById(R.id.priority);
 
@@ -40,13 +43,25 @@ public class AddEditItemActivity extends AppCompatActivity {
         String priorityLevel = priorityDropdown.getSelectedItem().toString();
 
         toDoList.addItem(taskName, false, mTodoListAdapter);
-//        editName.setText("");
-////      close the keyboard
-//        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         saveTask(view);
     }
 
+
+    public void showDatePickerDailog(View view){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+    @Override
+    public void onDateSet (android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+        String date = dayOfMonth + "/" + month + "/" + year;
+        dueDateBox.setText(date);
+    }
 
 
     public void saveTask(View view) {

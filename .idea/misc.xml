@@ -3,25 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../layout/custom_preview.xml" value="0.25462962962962965" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/layout/activity_archived_tasks.xml" value="0.1" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/layout/add_edit_task.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/layout/toolbar.xml" value="0.2046875" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/menu/menu_main.xml" value="0.2046875" />
-        <entry key="..\:/Users/David Bodruzzaman/StudioProjects/CS3500/app/src/main/res/menu/menu_main_archive.xml" value="0.2484375" />
-        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/edit_task.xml" value="0.3265625" />
-        <entry key="..\:/Users/tadhg/git/CS3500/app/src/main/res/layout/item_todo.xml" value="0.196875" />
-        <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.2984375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/add_edit_task.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/add_task_popup.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/add_task_window.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/edit_task.xml" value="0.24320652173913043" />
-        <entry key="app/src/main/res/layout/home_page.xml" value="0.15572916666666667" />
-        <entry key="app/src/main/res/layout/item_todo.xml" value="0.45" />
-        <entry key="app/src/main/res/layout/popup_for_add_task.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_archived_tasks.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.43020833333333336" />
+        <entry key="app/src/main/res/layout/nav_header.xml" value="0.21510416666666668" />
+        <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.21510416666666668" />
+        <entry key="app/src/main/res/menu/menu_main_active.xml" value="0.14114583333333333" />
+        <entry key="app/src/main/res/menu/menu_main_archive.xml" value="0.14114583333333333" />
+        <entry key="app/src/main/res/menu/menu_nav.xml" value="0.24791666666666667" />
       </map>
     </option>
   </component>

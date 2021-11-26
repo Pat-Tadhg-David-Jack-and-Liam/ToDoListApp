@@ -1,11 +1,5 @@
 package com.dpjlt.todolist;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +7,12 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ArchivedTasks extends AppCompatActivity {
     private static ToDoList toDoList = AppLaunch.getToDoListArchive();
@@ -44,6 +43,7 @@ public class ArchivedTasks extends AppCompatActivity {
         SpannableString NewSortByPriorityString = new SpannableString("Sort By Priority");
         NewSortByPriorityString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, NewSortByPriorityString.length(), 0);
         item.setTitle(NewSortByPriorityString);
+        getSupportActionBar().setTitle("Archive");
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setTitle("Active");
 //        this.setupEditTextListener();
 
 

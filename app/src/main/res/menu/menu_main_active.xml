@@ -16,7 +16,7 @@
 
     <item android:id="@+id/SortPriority"
         android:title="Sort by Priority"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="ifRoom"/>
 
 

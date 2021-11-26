@@ -59,6 +59,16 @@ public final class ToDoList {
         Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED, TASK_DATE", "TASK_TAG", "TASK_PRIORITY"},
                 null,null,null,null,null);
 
+        addTasksFromDB(cursor);
+
+        cursor.close();
+    }
+
+    /**
+     * Add tasks from the database to the list
+     * @param cursor a cursor on the database we're using
+     */
+    public void addTasksFromDB(Cursor cursor){
         if(cursor.moveToFirst()){
             String taskName = cursor.getString(1);
             boolean taskChecked = cursor.getInt(2) > 0;
@@ -75,7 +85,6 @@ public final class ToDoList {
                 this.addItem(taskName,taskChecked, dueDate, taskTag, taskPriority);
             }
         }
-        cursor.close();
     }
 
     /**

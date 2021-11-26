@@ -10,6 +10,7 @@ public class AppLaunch extends Application {
     private static ToDoList toDoListActive;
     private static ToDoList toDoListArchive;
 
+    @Override
     public void onCreate() {
         super.onCreate();
         final ToDoListSQLiteHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(getApplicationContext());

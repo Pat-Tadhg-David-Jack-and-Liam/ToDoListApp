@@ -55,7 +55,7 @@
         android:id="@+id/textDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="60dp"
         android:text="Due Date"
         app:layout_constraintStart_toEndOf="@+id/textTag"
         app:layout_constraintTop_toTopOf="@+id/textTag" />
@@ -64,7 +64,7 @@
         android:id="@+id/textPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="44dp"
         android:text="Priority"
         app:layout_constraintStart_toEndOf="@+id/textDueDate"
         app:layout_constraintTop_toTopOf="@+id/textTag" />

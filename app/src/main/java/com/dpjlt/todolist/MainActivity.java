@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         //bind the recyclerview
         rvTodoList.setAdapter(mTodoListAdapter);
         rvTodoList.setLayoutManager(new LinearLayoutManager(this));
-
         rvTodoList.addItemDecoration(new DividerItemDecoration(rvTodoList.getContext(), DividerItemDecoration.VERTICAL));
 
         Toolbar toolbar = findViewById(R.id.toolbar1);

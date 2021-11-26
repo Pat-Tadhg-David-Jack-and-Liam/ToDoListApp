@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddEditItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private Spinner dropdown;
@@ -74,12 +76,29 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
         datePickerDialog.show();
     }
 
     @Override
     public void onDateSet (android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        String date = dayOfMonth + "/" + month + "/" + year;
+        int curyear = Calendar.getInstance().get(Calendar.YEAR);
+        int curmonth =  Calendar.getInstance().get(Calendar.MONTH);
+        int curdayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(year + "-"+month+"-"+dayOfMonth);
+            Date currentDate = sdf.parse(curyear + "-"+curmonth+"-"+curdayOfMonth);
+            if (date.before(currentDate)){
+                year = curyear;
+                month = curmonth;
+                dayOfMonth = curdayOfMonth;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String date = dayOfMonth + "/" + (month+1) + "/" + year;
         dueDateBox.setText(date);
     }
 

@@ -3,6 +3,7 @@ package com.dpjlt.todolist;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
             textTag = itemView.findViewById(R.id.textTag);
             textPriority = itemView.findViewById(R.id.textPriority);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
+            System.out.println(itemView.findViewById(R.id.removeTaskButton));
             removeTaskButton.setOnClickListener(v -> todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter, ArchivedTasks.aTodoListAdapter));
             check.setOnClickListener(v -> {
                 toDoListItem.setChecked(((CheckBox) v).isChecked());
@@ -57,7 +59,9 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
 
     private static final ToDoList todoList = AppLaunch.getToDoListActive();
 
-
+    public String stuff(){
+        return "stuff";
+    }
 
     @NonNull
     @Override

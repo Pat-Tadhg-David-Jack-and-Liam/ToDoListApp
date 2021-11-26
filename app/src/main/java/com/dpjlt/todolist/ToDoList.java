@@ -191,7 +191,7 @@ public final class ToDoList {
 
     final public void sortByPriorityActive(){
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY (CASE TASK_TAG WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 WHEN 'No Priority' THEN 4 END)", new String[] {} );
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM TASKS ORDER BY (CASE TASK_PRIORITY WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 WHEN 'No Priority' THEN 4 END)", new String[] {} );
                 //dbRead.rawQuery("SELECT * FROM TASKS ORDER BY FIELD(TASK_TAG, 'High', 'Medium', 'Low')", new String[] {} );
         addTasksFromDB(cursor);
         cursor.close();
@@ -202,7 +202,7 @@ public final class ToDoList {
 
     final public void sortByTagArchive(){
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY (CASE TASK_TAG WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 END)", new String[] {} );
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY TASK_TAG", new String[] {} );
         addTasksFromDB(cursor);
         cursor.close();
         ArchivedTasks.aTodoListAdapter.notifyDataSetChanged();
@@ -210,7 +210,7 @@ public final class ToDoList {
 
     final public void sortByPriorityArchive(){
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY TASK_PRIORITY", new String[] {} );
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY (CASE TASK_PRIORITY WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 WHEN 'No Priority' THEN 4 END)", new String[] {} );
         addTasksFromDB(cursor);
         cursor.close();
         ArchivedTasks.aTodoListAdapter.notifyDataSetChanged();

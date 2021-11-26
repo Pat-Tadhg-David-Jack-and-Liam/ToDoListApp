@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -36,6 +39,11 @@ public class ArchivedTasks extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main_archive, menu);
+        int SortByPriority = 2;
+        MenuItem item = menu.getItem(SortByPriority);
+        SpannableString NewSortByPriorityString = new SpannableString("Sort By Priority");
+        NewSortByPriorityString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, NewSortByPriorityString.length(), 0);
+        item.setTitle(NewSortByPriorityString);
         return super.onCreateOptionsMenu(menu);
     }
 

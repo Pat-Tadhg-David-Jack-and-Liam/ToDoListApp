@@ -25,6 +25,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -37,6 +41,7 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-intents:3.4.0'
     implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     testImplementation 'junit:junit:4.+'
+    testImplementation "org.mockito:mockito-core:3.+"
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     // Core library

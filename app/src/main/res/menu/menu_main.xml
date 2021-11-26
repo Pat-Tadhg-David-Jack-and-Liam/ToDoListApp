@@ -11,6 +11,11 @@
 
     <item android:id="@+id/Active_Tasks"
         android:title="Active Tasks"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/SortTag"
+        android:title="Sort by Tag"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"/>
 

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public final class ToDoList {
@@ -145,7 +146,38 @@ public final class ToDoList {
         aTodoItemsAdapter.notifyItemRemoved(index);
     }
 
+    final public void removeItemSortActive(){
+        for(Iterator<Item> iterator = toDoListTasks.iterator(); iterator.hasNext();){
+            Item item = iterator.next();
+            int index = toDoListTasks.indexOf(item);
+            iterator.remove();
+            MainActivity.mTodoListAdapter.notifyItemRemoved(index);
+        }
+    }
 
+    final public void removeItemSortArchive(){
+        for(Iterator<Item> iterator = toDoListTasks.iterator(); iterator.hasNext();){
+            Item item = iterator.next();
+            int index = toDoListTasks.indexOf(item);
+            iterator.remove();
+            ArchivedTasks.aTodoListAdapter.notifyItemRemoved(index);
+        }
+    }
+
+    final public void sortByTag(){
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM TASKS ORDER BY TASK_TAG", new String[] {} );
+        addTasksFromDB(cursor);
+        cursor.close();
+        MainActivity.mTodoListAdapter.notifyDataSetChanged();
+    }
+    final public void sortByPriority(){
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM TASKS ORDER BY TASK_PRIORITY", new String[] {} );
+        addTasksFromDB(cursor);
+        cursor.close();
+        MainActivity.mTodoListAdapter.notifyDataSetChanged();
+    }
 
 
 

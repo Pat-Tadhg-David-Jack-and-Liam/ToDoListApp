@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Already in Active Tasks", Toast.LENGTH_LONG).show();
                 return true;
 
+            case R.id.SortTag:
+                toDoList.removeItemSortActive();
+                toDoList.sortByTag();
+                return true;
+
             default:
                 Toast.makeText(this, "umm wut", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);

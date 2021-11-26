@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TODOLIST">
         <activity
+            android:name=".ArchivedTasks"
+            android:exported="false" />
+        <activity
             android:name=".AddEditItemActivity"
             android:exported="true" />
         <activity

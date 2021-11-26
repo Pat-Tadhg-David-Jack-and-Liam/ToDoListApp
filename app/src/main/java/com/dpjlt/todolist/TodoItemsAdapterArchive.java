@@ -15,20 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Convert a position in the item_todo into a list row item to be inserted
- * @author Group 11
+ * @author liam
  */
-public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.ViewHolder>{
+public class TodoItemsAdapterArchive extends RecyclerView.Adapter<TodoItemsAdapterArchive.ViewHolder>{
     /**
      * Provides direct reference to each of the views within item_todo.xml
-     * @author Group 11
+     * @author liam
      */
+
+    private static final ToDoList todoList = AppLaunch.getToDoListArchive();
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView textTask;
         public CheckBox check;
         public Button removeTaskButton;
-        public TextView textDueDate;
-        public TextView textTag;
-        public TextView textPriority;
         public ToDoList.Item toDoListItem;
         public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this.itemView.getContext());
 
@@ -40,34 +40,36 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
             super(itemView);
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
-            textDueDate = itemView.findViewById(R.id.textDueDate);
-            textTag = itemView.findViewById(R.id.textTag);
-            textPriority = itemView.findViewById(R.id.textPriority);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
-            removeTaskButton.setOnClickListener(v -> todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter, ArchivedTasks.aTodoListAdapter));
-            check.setOnClickListener(v -> {
-                toDoListItem.setChecked(((CheckBox) v).isChecked());
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
-                toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
+            removeTaskButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    todoList.removeItem(toDoListItem, ArchivedTasks.aTodoListAdapter);
+                }
+            });
+            check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toDoListItem.setChecked(((CheckBox) v).isChecked());
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
+                    toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
+                }
             });
 
         }
     }
 
-    private static final ToDoList todoList = AppLaunch.getToDoListActive();
-
-
 
     @NonNull
     @Override
-    public TodoItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodoItemsAdapterArchive.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         // inflate the layout
-        View todoItemView = inflater.inflate(R.layout.item_todo, parent, false);
+        View todoItemViewArchive = inflater.inflate(R.layout.item_todo, parent, false);
 
-        return new ViewHolder(todoItemView);
+        return new ViewHolder(todoItemViewArchive);
     }
 
     /**
@@ -77,14 +79,11 @@ public class TodoItemsAdapter extends RecyclerView.Adapter<TodoItemsAdapter.View
      * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= todoList.getLength())
      */
     @Override
-    public void onBindViewHolder(@NonNull TodoItemsAdapter.ViewHolder holder, int position) throws IndexOutOfBoundsException {
+    public void onBindViewHolder(@NonNull TodoItemsAdapterArchive.ViewHolder holder, int position) throws IndexOutOfBoundsException {
         ToDoList.Item item = todoList.getIndex(position);
         holder.toDoListItem = item;
         holder.check.setChecked(item.getChecked());
         holder.textTask.setText(item.getTaskHeading());
-        holder.textDueDate.setText(item.getDueDate());
-        holder.textTag.setText(item.getTag());
-        holder.textPriority.setText(item.getPriority());
     }
 
     @Override

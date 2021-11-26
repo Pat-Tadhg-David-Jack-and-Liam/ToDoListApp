@@ -52,11 +52,11 @@ public final class ToDoList {
     private ToDoListSQLiteHelper toDoListDatabaseHelper;
 
 
-    public ToDoList(ToDoListSQLiteHelper toDoListDatabaseHelper){
+    public ToDoList(ToDoListSQLiteHelper toDoListDatabaseHelper, String table){
         this.toDoListDatabaseHelper = toDoListDatabaseHelper;
         toDoListTasks = new ArrayList<>();
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.query("TASKS", new String[] {"_id", "TASK_NAME", "TASK_CHECKED, TASK_DATE", "TASK_TAG", "TASK_PRIORITY"},
+        Cursor cursor = dbRead.query(table, new String[] {"_id", "TASK_NAME", "TASK_CHECKED, TASK_DATE", "TASK_TAG", "TASK_PRIORITY"},
                 null,null,null,null,null);
 
         addTasksFromDB(cursor);
@@ -100,7 +100,15 @@ public final class ToDoList {
         } else {
             throw new IllegalArgumentException("task heading must be less than 100 chars");
         }
+
+
     }
+
+    final public void addItem(Item item){
+        toDoListTasks.add(item);
+    }
+
+
     /**
      * Method for adding new  items to the list
      * @param taskHeading title of the task
@@ -120,12 +128,27 @@ public final class ToDoList {
 
     }
 
-    final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter){
+    final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter, TodoItemsAdapterArchive aTodoItemsAdapter){
         int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
+        String SQL = String.format("INSERT INTO ARCHIVE SELECT * FROM TASKS WHERE TASK_NAME = '%s';", item.getTaskHeading() );
+        toDoListDatabaseHelper.getWritableDatabase().execSQL(SQL);
         toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {item.getTaskHeading()});
         mTodoItemsAdapter.notifyItemRemoved(index);
+        AppLaunch.getToDoListArchive().addItem(item);
+        aTodoItemsAdapter.notifyItemInserted(AppLaunch.getToDoListArchive().getLength() - 1);
     }
+    final public void removeItem(Item item,     TodoItemsAdapterArchive aTodoItemsAdapter){
+        int index = toDoListTasks.indexOf(item);
+        toDoListTasks.remove(item);
+        toDoListDatabaseHelper.getWritableDatabase().delete("ARCHIVE", "TASK_NAME = ?", new String[] {item.getTaskHeading()});
+        aTodoItemsAdapter.notifyItemRemoved(index);
+    }
+
+
+
+
+
 
     final public int getLength(){
         return toDoListTasks.size();

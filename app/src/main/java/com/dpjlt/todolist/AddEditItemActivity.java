@@ -3,12 +3,15 @@ package com.dpjlt.todolist;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -16,7 +19,7 @@ import java.util.Calendar;
 public class AddEditItemActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
     private Spinner dropdown;
     private EditText dueDateBox;
-    private static ToDoList toDoList = AppLaunch.getToDoList();
+    private static ToDoList toDoList = AppLaunch.getToDoListActive();
     public static TodoItemsAdapter mTodoListAdapter = MainActivity.mTodoListAdapter;
 
 
@@ -31,9 +34,24 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
         String[] priorities = new String[]{"No Priority", "Low", "Medium", "High"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, priorities);
         dropdown.setAdapter(adapter);
+        Toolbar toolbar = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
-    public void addTask (View view) throws ParseException {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void addTask (View view) {
         EditText nameBox = findViewById(R.id.name);
         EditText tagBox = findViewById(R.id.tag);
         Spinner priorityDropdown = findViewById(R.id.priority);

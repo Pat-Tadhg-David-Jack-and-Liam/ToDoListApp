@@ -42,6 +42,10 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
                 "TASK_TAG TEXT,"+
                 "TASK_PRIORITY TEXT)");
 
+        db.execSQL("CREATE TABLE ARCHIVE (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "TASK_NAME TEXT," +
+                "TASK_CHECKED NUMERIC DEFAULT 0)");
+
     }
 
     // If any modifications are to be made after the initial database is made
@@ -57,6 +61,11 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
         }
         if ( oldVersion < 2 ) {
             db.execSQL("ALTER TABLE TASKS ADD COLUMN TASK_CHECKED NUMERIC DEFAULT 0");
+        }
+        if (oldVersion < 3) {
+            db.execSQL("CREATE TABLE ARCHIVE(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "TASK_NAME TEXT," +
+                    "TASK_CHECKED NUMERIC DEFAULT 0)");
         }
     }
 

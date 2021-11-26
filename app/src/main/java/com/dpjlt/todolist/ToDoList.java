@@ -92,12 +92,14 @@ public final class ToDoList {
      * Method for adding to the list when the App starts
      * @param taskHeading title of the task
      * @param checked if the task is completed
+     * @
      * @throws IllegalArgumentException when task heading > 100 chars
      */
-    final public void addItem(String taskHeading, boolean checked, String dueDate, String taskTag, String taskPriority) throws IllegalArgumentException{
+    final public Item addItem(String taskHeading, boolean checked, String dueDate, String taskTag, String taskPriority) throws IllegalArgumentException{
         if(taskHeading.length() < 100) {
             Item newItem = new Item(taskHeading, checked, dueDate, taskTag, taskPriority);
             toDoListTasks.add(newItem);
+            return newItem;
         } else {
             throw new IllegalArgumentException("task heading must be less than 100 chars");
         }
@@ -116,8 +118,8 @@ public final class ToDoList {
      * @param checked if the task is completed
      * @throws IllegalArgumentException when task heading > 100 chars
      */
-    final public void addItem(String taskHeading,boolean checked, String dueDate, String taskTag, String taskPriority, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException, ParseException {
-        this.addItem(taskHeading, checked, dueDate, taskTag, taskPriority);
+    final public Item addItem(String taskHeading,boolean checked, String dueDate, String taskTag, String taskPriority, TodoItemsAdapter mTodoItemsAdapter) throws IllegalArgumentException, ParseException {
+        Item newItem = this.addItem(taskHeading, checked, dueDate, taskTag, taskPriority);
         ContentValues taskValues = new ContentValues();
         taskValues.put("TASK_NAME", taskHeading);
         taskValues.put("TASK_CHECKED", checked);
@@ -126,6 +128,7 @@ public final class ToDoList {
         taskValues.put("TASK_PRIORITY", taskPriority);
         toDoListDatabaseHelper.getWritableDatabase().insert("TASKS",null,  taskValues);
         mTodoItemsAdapter.notifyItemInserted(this.getLength() - 1);
+        return newItem;
 
     }
 

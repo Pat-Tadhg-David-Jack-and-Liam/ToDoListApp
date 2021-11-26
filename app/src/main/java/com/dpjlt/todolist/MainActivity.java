@@ -1,7 +1,10 @@
 package com.dpjlt.todolist;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_active, menu);
+        int SortByPriority = 2;
+        MenuItem item = menu.getItem(SortByPriority);
+        SpannableString NewSortByPriorityString = new SpannableString("Sort By Priority");
+        NewSortByPriorityString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, NewSortByPriorityString.length(), 0);
+        item.setTitle(NewSortByPriorityString);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -59,13 +67,18 @@ public class MainActivity extends AppCompatActivity {
                 // Returning true lets android know we've dealt with the item being clicked
                 return true;
 
-            case R.id.Active_Tasks:
-                Toast.makeText(this, "Already in Active Tasks", Toast.LENGTH_LONG).show();
-                return true;
+//            case R.id.Active_Tasks:
+//                Toast.makeText(this, "Already in Active Tasks", Toast.LENGTH_LONG).show();
+//                return true;
 
             case R.id.SortTag:
                 toDoList.removeItemSortActive();
-                toDoList.sortByTag();
+                toDoList.sortByTagActive();
+                return true;
+
+            case R.id.SortPriority:
+                toDoList.removeItemSortActive();
+                toDoList.sortByPriorityActive();
                 return true;
 
             default:

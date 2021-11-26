@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class ArchivedTasks extends AppCompatActivity {
+    private static ToDoList toDoList = AppLaunch.getToDoListArchive();
     public static TodoItemsAdapterArchive aTodoListAdapter = new TodoItemsAdapterArchive();
 
     @Override
@@ -34,7 +35,7 @@ public class ArchivedTasks extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_archive, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -44,13 +45,23 @@ public class ArchivedTasks extends AppCompatActivity {
 
         switch(item.getItemId()) {
 
-            case R.id.Archived_Tasks:
-                Toast.makeText(this, "Already in Archived Tasks", Toast.LENGTH_LONG).show();
-                return true;
+//            case R.id.Archived_Tasks:
+//                Toast.makeText(this, "Already in Archived Tasks", Toast.LENGTH_LONG).show();
+//                return true;
 
             case R.id.Active_Tasks:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+
+            case R.id.SortTag:
+                toDoList.removeItemSortArchive();
+                toDoList.sortByTagArchive();
+                return true;
+
+            case R.id.SortPriority:
+                toDoList.removeItemSortArchive();
+                toDoList.sortByPriorityArchive();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

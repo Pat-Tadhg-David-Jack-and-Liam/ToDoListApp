@@ -132,13 +132,30 @@ public final class ToDoList {
     final public void removeItem(Item item, TodoItemsAdapter mTodoItemsAdapter, TodoItemsAdapterArchive aTodoItemsAdapter){
         int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
-        String SQL = String.format("INSERT INTO ARCHIVE SELECT * FROM TASKS WHERE TASK_NAME = '%s';", item.getTaskHeading() );
-        toDoListDatabaseHelper.getWritableDatabase().execSQL(SQL);
+       // String SQL = String.format("INSERT INTO ARCHIVE SELECT * FROM TASKS WHERE TASK_NAME = '%s';", item.getTaskHeading() );
+       // toDoListDatabaseHelper.getWritableDatabase().rawQuery("INSERT INTO ARCHIVE SELECT * FROM TASKS WHERE TASK_NAME = ? AND TASK_TAG = ?;", new String[] {item.getTaskHeading(), item.getTag()});
+
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("TASK_NAME", item.getTaskHeading());
+        taskValues.put("TASK_CHECKED", item.getChecked());
+        taskValues.put("TASK_DATE", item.getDueDate());
+        taskValues.put("TASK_TAG", item.getTag());
+        taskValues.put("TASK_PRIORITY", item.getPriority());
+        toDoListDatabaseHelper.getWritableDatabase().insert("ARCHIVE",null,taskValues);
+
+
+
+
         toDoListDatabaseHelper.getWritableDatabase().delete("TASKS", "TASK_NAME = ?", new String[] {item.getTaskHeading()});
         mTodoItemsAdapter.notifyItemRemoved(index);
         AppLaunch.getToDoListArchive().addItem(item);
         aTodoItemsAdapter.notifyItemInserted(AppLaunch.getToDoListArchive().getLength() - 1);
     }
+
+
+
+
+
     final public void removeItem(Item item,     TodoItemsAdapterArchive aTodoItemsAdapter){
         int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
@@ -164,19 +181,39 @@ public final class ToDoList {
         }
     }
 
-    final public void sortByTag(){
+    final public void sortByTagActive(){
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
         Cursor cursor = dbRead.rawQuery("SELECT * FROM TASKS ORDER BY TASK_TAG", new String[] {} );
         addTasksFromDB(cursor);
         cursor.close();
         MainActivity.mTodoListAdapter.notifyDataSetChanged();
     }
-    final public void sortByPriority(){
+
+    final public void sortByPriorityActive(){
         SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
-        Cursor cursor = dbRead.rawQuery("SELECT * FROM TASKS ORDER BY TASK_PRIORITY", new String[] {} );
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY (CASE TASK_TAG WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 WHEN 'No Priority' THEN 4 END)", new String[] {} );
+                //dbRead.rawQuery("SELECT * FROM TASKS ORDER BY FIELD(TASK_TAG, 'High', 'Medium', 'Low')", new String[] {} );
         addTasksFromDB(cursor);
         cursor.close();
         MainActivity.mTodoListAdapter.notifyDataSetChanged();
+    }
+
+    // ORDER BY FIELD(TASK_TAG, 'High', 'Medium', 'Low')
+
+    final public void sortByTagArchive(){
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY (CASE TASK_TAG WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 END)", new String[] {} );
+        addTasksFromDB(cursor);
+        cursor.close();
+        ArchivedTasks.aTodoListAdapter.notifyDataSetChanged();
+    }
+
+    final public void sortByPriorityArchive(){
+        SQLiteDatabase dbRead = toDoListDatabaseHelper.getReadableDatabase();
+        Cursor cursor = dbRead.rawQuery("SELECT * FROM ARCHIVE ORDER BY TASK_PRIORITY", new String[] {} );
+        addTasksFromDB(cursor);
+        cursor.close();
+        ArchivedTasks.aTodoListAdapter.notifyDataSetChanged();
     }
 
 

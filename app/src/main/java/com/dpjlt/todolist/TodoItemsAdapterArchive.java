@@ -29,6 +29,9 @@ public class TodoItemsAdapterArchive extends RecyclerView.Adapter<TodoItemsAdapt
         public TextView textTask;
         public CheckBox check;
         public Button removeTaskButton;
+        public TextView textDueDate;
+        public TextView textTag;
+        public TextView textPriority;
         public ToDoList.Item toDoListItem;
         public final SQLiteOpenHelper toDoListDatabaseHelper = new ToDoListSQLiteHelper(this.itemView.getContext());
 
@@ -40,25 +43,21 @@ public class TodoItemsAdapterArchive extends RecyclerView.Adapter<TodoItemsAdapt
             super(itemView);
             textTask = itemView.findViewById(R.id.textTask);
             check = itemView.findViewById(R.id.check);
+            textDueDate = itemView.findViewById(R.id.textDueDate);
+            textTag = itemView.findViewById(R.id.textTag);
+            textPriority = itemView.findViewById(R.id.textPriority);
             removeTaskButton = itemView.findViewById(R.id.removeTaskButton);
-            removeTaskButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    todoList.removeItem(toDoListItem, ArchivedTasks.aTodoListAdapter);
-                }
-            });
-            check.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toDoListItem.setChecked(((CheckBox) v).isChecked());
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
-                    toDoListDatabaseHelper.getWritableDatabase().update("TASKS", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
-                }
+            removeTaskButton.setOnClickListener(v -> todoList.removeItem(toDoListItem, MainActivity.mTodoListAdapter, ArchivedTasks.aTodoListAdapter));
+            check.setOnClickListener(v -> {
+                toDoListItem.setChecked(((CheckBox) v).isChecked());
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("TASK_CHECKED", ((CheckBox) v).isChecked());
+                toDoListDatabaseHelper.getWritableDatabase().update("ARCHIVE", contentValues,"TASK_NAME = ?", new String[] {toDoListItem.getTaskHeading()});
             });
 
         }
     }
+
 
 
     @NonNull
@@ -84,6 +83,9 @@ public class TodoItemsAdapterArchive extends RecyclerView.Adapter<TodoItemsAdapt
         holder.toDoListItem = item;
         holder.check.setChecked(item.getChecked());
         holder.textTask.setText(item.getTaskHeading());
+        holder.textDueDate.setText(item.getDueDate());
+        holder.textTag.setText(item.getTag());
+        holder.textPriority.setText(item.getPriority());
     }
 
     @Override

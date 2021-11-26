@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dpjlt.todolist.MainActivity">
+
+
+    <item android:id="@+id/Active_Tasks"
+        android:title="Active Tasks"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/SortTag"
+        android:title="Sort by Tag"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/SortPriority"
+        android:title="Sort by Priority"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom" />
+
+</menu>

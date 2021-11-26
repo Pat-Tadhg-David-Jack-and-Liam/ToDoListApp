@@ -51,7 +51,7 @@ public class AddEditItemActivity extends AppCompatActivity implements DatePicker
     }
 
 
-    public void addTask (View view) {
+    public void addTask (View view) throws ParseException {
         EditText nameBox = findViewById(R.id.name);
         EditText tagBox = findViewById(R.id.tag);
         Spinner priorityDropdown = findViewById(R.id.priority);

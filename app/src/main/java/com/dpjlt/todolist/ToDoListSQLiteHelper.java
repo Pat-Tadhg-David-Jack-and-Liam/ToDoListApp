@@ -20,7 +20,7 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "Tasks";
     // For version control. Makes it easier to make changes and make rollbacks
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     // Context is the activity it's in
     // null is something to do with cursors not sure what
@@ -42,9 +42,12 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
                 "TASK_TAG TEXT,"+
                 "TASK_PRIORITY TEXT)");
 
-        db.execSQL("CREATE TABLE ARCHIVE (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE ARCHIVE (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "TASK_NAME TEXT," +
-                "TASK_CHECKED NUMERIC DEFAULT 0)");
+                "TASK_CHECKED NUMERIC,"+
+                "TASK_DATE TEXT,"+
+                "TASK_TAG TEXT,"+
+                "TASK_PRIORITY TEXT)");
 
     }
 
@@ -52,6 +55,14 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
     // the modifications are to be made in this method
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+        if (oldVersion < 5) {
+            db.execSQL("CREATE TABLE ARCHIVE (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "TASK_NAME TEXT," +
+                    "TASK_CHECKED NUMERIC,"+
+                    "TASK_DATE TEXT,"+
+                    "TASK_TAG TEXT,"+
+                    "TASK_PRIORITY TEXT)");
+
         if ( oldVersion < 4 ) {
             db.execSQL("ALTER TABLE TASKS ADD COLUMN TASK_TAG TEXT DEFAULT ''");
             db.execSQL("ALTER TABLE TASKS ADD COLUMN TASK_PRIORITY TEXT DEFAULT ''");
@@ -62,10 +73,8 @@ public class ToDoListSQLiteHelper extends SQLiteOpenHelper {
         if ( oldVersion < 2 ) {
             db.execSQL("ALTER TABLE TASKS ADD COLUMN TASK_CHECKED NUMERIC DEFAULT 0");
         }
-        if (oldVersion < 3) {
-            db.execSQL("CREATE TABLE ARCHIVE(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "TASK_NAME TEXT," +
-                    "TASK_CHECKED NUMERIC DEFAULT 0)");
+
+
         }
     }
 

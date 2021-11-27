@@ -159,11 +159,12 @@ public final class ToDoList {
 
 
 
-    final public void removeItem(Item item,     TodoItemsAdapterArchive aTodoItemsAdapter){
+    final public Item removeItem(Item item,     TodoItemsAdapterArchive aTodoItemsAdapter){
         int index = toDoListTasks.indexOf(item);
         toDoListTasks.remove(item);
         toDoListDatabaseHelper.getWritableDatabase().delete("ARCHIVE", "TASK_NAME = ?", new String[] {item.getTaskHeading()});
         aTodoItemsAdapter.notifyItemRemoved(index);
+        return item;
     }
 
     final public void removeItemSortActive(){
